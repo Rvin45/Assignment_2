@@ -64,7 +64,7 @@ export const year_switch_spec = {
     "size": 2
   },
   "encoding": {
-    "x": {"datum": "FY20-21"}   // the year when the dip happened
+    "x": {"value": 286}   // the year when the dip happened
   }
 },
 {
@@ -80,7 +80,7 @@ export const year_switch_spec = {
     "fontSize": 16,
   },
   "encoding": {
-    "x": {"datum": "FY20-21"},
+    "x": {"value": 290},
     "y": {"datum": 500000},       // adjust based on your data scale
     "text": {"value": "Drop due to COVID-19"}
   }
