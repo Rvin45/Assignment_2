@@ -1,95 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Melbourne Metro Train Stops & Lines</title>
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    #vis {
-      width: 100%;
-      height: 700px;
-    }
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .vis { width: 100%; height: 700px; }
   </style>
 </head>
 <body>
   <h2 style="text-align:center;">PTV Metro Trains Annual Passenger</h2>
-  <div id="vis" style="text-align:center;"></div>
+  <div class="vis" id="map_vis" style="text-align:center;"></div>
 
-  <script type="text/javascript">
-    const spec = {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 700,
-    "height": 700,
-    "layer": [
-      {
-        "data": {
-          "url": "./js/clipped_map.json",
-          "format": {"type": "topojson", "feature": "vic_localities"}
-        },
-        "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"}
-      },
-   {
-  "data": {
-    "url": "./js/metro_train_line.json",
-    "format": {"type": "topojson", "feature": "metro_train_lines_wrangled"}
-  },
-  "transform": [
-    {
-      "calculate": "datum.properties.SHORT_NAME == 'Replacement Bus' ? split(datum.properties.LONG_NAME, ' ')[0] : datum.properties.SHORT_NAME",
-      "as": "Line"
-    }
-  ],
-  "mark": {"type": "geoshape", "strokeWidth": 2, "fill": null},
-  "encoding": {
-    "stroke": {
-      "field": "Line",
-      "type": "nominal",
-      "scale": {"scheme": "category20"},
-      "legend": {"title": "Train Lines", "orient": "right",  }
-    },
-    "tooltip": [
-      {"field": "Line", "type": "nominal", "title": "Train Line"},
-      {"field": "properties.LONG_NAME", "type": "nominal", "title": "Route"}
-    ]
-  }
-},
-{
-  "data": {
-    "url": "./js/annual_metropolitan_train_station_entries_fy_2024_2025.csv"
-  },
-  "transform": [
-    {"filter": "datum.Stop_long >= 144.67 && datum.Stop_long <= 145.35"},
-    {"filter": "datum.Stop_lat >= -38.16 && datum.Stop_lat <= -37.54"}
-  ],
-  "mark": {"type": "circle", "opacity": 1, "stroke": "blue"},
-  "encoding": {
-    "longitude": {"field": "Stop_long", "type": "quantitative"},
-    "latitude": {"field": "Stop_lat", "type": "quantitative"},
-    "size": {
-      "field": "Pax_annual",
-      "type": "quantitative",
-      "scale": {"range": [30, 300]},
-      "legend": {"title": "Annual Passengers"}
-    },
-    "color": {"value": "steelblue"},
-"tooltip": [
-  {"field": "Stop_name", "type": "nominal", "title": "Station"},
-  {"field": "Pax_annual", "type": "quantitative", "title": "Annual Entries"}
-]
-  }
-}
 
-  ],
-  "projection": {"type": "mercator"}
-}
+  <h2 style="text-align:center;">Passenger Count by Time</h2>
+  <div class="vis" id="blc_vis" style="text-align:center;"></div>
 
-    vegaEmbed('#vis', spec).catch(console.error);
+
+  <script type="module" src="js/main.js">
   </script>
 </body>
 </html>
