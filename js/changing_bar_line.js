@@ -64,7 +64,7 @@ export const year_switch_spec = {
     "size": 2
   },
   "encoding": {
-    "x": {"value": 286}   // the year when the dip happened
+    "x": {"value": 215}   // the year when the dip happened
   }
 },
 {
@@ -75,7 +75,7 @@ export const year_switch_spec = {
     "type": "text",
     "align": "left",
     "dx": 5,
-    "dy": -10,
+    "dy": -5,
     "color": "black",
     "fontSize": 16,
   },
