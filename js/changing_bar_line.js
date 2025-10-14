@@ -1,7 +1,7 @@
 export const year_switch_spec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Switch between a line chart for all years and a bar chart for a selected year.",
-  "width": 800,
+  "width": 600,
   "height": 500,
   "data": { "url": "./js/data/combined_passenger_summary_2018_2025.csv"},
 
