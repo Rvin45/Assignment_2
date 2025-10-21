@@ -1,13 +1,11 @@
 export const year_switch_spec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Switch between a line chart for all years and a bar chart for a selected year.",
-  "width": 600,
-  "height": 500,
+  "width": "container",
+  "height":325,
+  "autosize": {"type": "fit", "contains": "padding"},
   "data": { "url": "./js/data/combined_passenger_summary_2018_2025.csv"},
 
-  // -----------------------------
-  // 1️⃣  Dropdown parameter
-  // -----------------------------
   "params": [
     {
       "name": "selected_year",
@@ -20,11 +18,8 @@ export const year_switch_spec = {
     }
   ],
 
-  // -----------------------------
-  // 2️⃣  Two layered charts
-  // -----------------------------
   "layer": [
-    // 3️⃣ Legend layer (always visible)
+
 {
   "mark": {"type": "point", "opacity": 0},   // invisible points
   "encoding": {
@@ -38,10 +33,17 @@ export const year_switch_spec = {
           "Weekday","School Holidays",
         "Sunday","Annual"
         ],
-        "range": [
-          "#152c6b","#ffbe00","#279fd5",
-          "#be1014","#028430","#f178af","#95979a","#b0b0b0"
-        ]
+"range": [
+  "#0072B2",  // Blue
+  "#E69F00",  // Orange
+  "#009E73",  // Green
+  "#CC79A7",  // Pink/Magenta
+  "#56B4E9",  // Sky Blue
+  "#D55E00",  // Vermillion (red-orange)
+  "#F0E442",  // Yellow
+  "#999999"   // Grey
+]
+
       },
       "legend": {
         "orient": "right",
@@ -64,7 +66,7 @@ export const year_switch_spec = {
     "size": 2
   },
   "encoding": {
-    "x": {"value": 215}   // the year when the dip happened
+    "x": {"value": 250}   // the year when the dip happened
   }
 },
 {
@@ -116,10 +118,17 @@ export const year_switch_spec = {
               "Weekday","Weekday",
               "Sunday","Annual"
             ],
-            "range": [
-              "#152c6b","#ffbe00","#279fd5",
-              "#be1014","#028430","#f178af","#95979a","#b0b0b0"
-            ]
+"range": [
+  "#0072B2",  // Blue
+  "#E69F00",  // Orange
+  "#009E73",  // Green
+  "#CC79A7",  // Pink/Magenta
+  "#56B4E9",  // Sky Blue
+  "#D55E00",  // Vermillion (red-orange)
+  "#F0E442",  // Yellow
+  "#999999"   // Grey
+]
+
           }
         },
         "tooltip": [
@@ -163,10 +172,17 @@ export const year_switch_spec = {
               "Weekday","School Holidays",
               "Sunday","Annual"
             ],
-            "range": [
-              "#152c6b","#ffbe00","#279fd5",
-              "#be1014","#028430","#f178af","#95979a","#b0b0b0"
-            ]
+"range": [
+  "#0072B2",  // Blue
+  "#E69F00",  // Orange
+  "#009E73",  // Green
+  "#CC79A7",  // Pink/Magenta
+  "#56B4E9",  // Sky Blue
+  "#D55E00",  // Vermillion (red-orange)
+  "#F0E442",  // Yellow
+  "#999999"   // Grey
+]
+
           }
         },
         "tooltip": [

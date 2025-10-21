@@ -1,7 +1,7 @@
 export const heatmapSchema = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Heatmap of Melbourne Metro train frequency by hour and line.",
-  "width": 600,
+  "width": 1000,
   "height": 400,
   "data": { "url": "./js/data/6Feb2020_data.csv" },
   "transform": [

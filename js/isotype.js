@@ -1,8 +1,9 @@
 export const isotypeSchema = {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "config": {"view": {"stroke": ""}},
-  "width": 800,
-  "height": 200,
+  "width": "container",
+  "height":325,
+  "autosize": {"type": "fit", "contains": "padding"},
   "data": {
     "values": [
       {"year": "FY18-19", "count": 24},
@@ -144,13 +145,13 @@ export const isotypeSchema = {
       },
       {
         "field": "count",
-        "title": "MCG Equivalent #",
+        "title": "Melbourne Cricket Ground Equivalent #",
         "format": "d"
       }
     ]
   },
   "title": {
     "text": "Metro Trains Melbourne — Annual Passenger Boardings (FY18–FY24)",
-    "subtitle": "Each 🏟️ represents ~10 million boardings (~100 MCGs filled)"
+    "subtitle": "Each 🏟️ represents ~10 million boardings (~100 Melbourne Cricket Grounds filled)"
   }
 };

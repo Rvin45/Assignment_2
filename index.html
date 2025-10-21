@@ -3,67 +3,221 @@
 <head>
   <meta charset="UTF-8" />
   <title>Melbourne Metro Train Stops & Lines</title>
+
+  <!-- Vega Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    .vis { width: 100%; height: 700px; }
-  </style>
+  <!-- Bootstrap -->
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
+    rel="stylesheet" 
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" 
+    crossorigin="anonymous"
+  >
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding-left: 12rem;
+    padding-right: 12rem;
+    transition: padding 0.3s ease;
+  }
+
+  .vis {
+    width: 100%;
+    height: 700px;
+  }
+
+  h5 {
+    font-weight: bold;
+  }
+
+  /* -------- Responsive Adjustments -------- */
+
+  /* For tablets and small laptops */
+  @media (max-width: 1200px) {
+    body {
+      padding-left: 6rem;
+      padding-right: 6rem;
+    }
+  }
+
+  /* For mobile and narrow screens */
+  @media (max-width: 768px) {
+    body {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  /* Optional: make visualisations scale nicely */
+  .vis {
+    height: auto;
+    min-height: 350px;
+  }
+
+  /* Improve readability on mobile */
+  h1.display-2 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+</style>
 </head>
-<body class="px-5">
-  <h1 class="display-2 mb-5">Public Transport: How Crucial are They?</h1>
 
-  <h3>1. Public Transport Role</h3>
-  <div class="row align-items-center mb-5">
-    <div class="col-md-4">
-      <p>Public transport is the lifeline of a growing city - shaping how people move, work, and connect. 
-        In Melbourne, Metro Trains plays a central role in keeping the city moving, with millions of daily 
-        commuters depending on it for accessibility and sustainability. 
-        In the 2023-24 financial year, Metro Trains recorded over <b>182 million passenger</b> boardings, 
-        a massive number to say the least, to put it to scale, MCG can hold up to <b>100,000 people, multiply that by 180</b>. 
-        This scale of movement reflects not just the city's 
-        reliance on rail transport, but its contribution to <b>
-          easing congestion, reducing emissions, and
-          connecting communities
-        </b> across metropolitan Melbourne. 
-        The visualisation here uses 🏟️ icons - each representing approximately 10 million journeys (or 10 MCGs) — 
-        to illustrate the magnitude of these annual boardings and the enduring importance of a robust public transport network in supporting an interconnected, sustainable city.</p>
-    </div>
-    <div class="col-md-7" style="height:300px">
-      <h5 style="text-align:center;">Annual passenger isotype</h5>
-      <div class="vis" id="isotype_vis"></div>
-    </div>
-  </div>
+<body style="padding-left: 12rem; padding-right: 12rem;">
 
-  <p class="px-5">Yet, behind these impressive numbers lies a network that must constantly adapt to Melbourne’s shifting rhythms. Demand for train services is far from uniform — it surges during weekday peaks, dips through quiet midday hours, and fluctuates dramatically across weekends and holidays. Each line, station, and hour presents a different challenge for scheduling, staffing, and infrastructure. This variation reveals the true complexity of managing an urban rail system: balancing capacity with efficiency, ensuring reliability during rush hours, and maintaining accessibility during off-peak periods.
-The visualisation below explores these swings in passenger demand across different times of day and days of the week, highlighting how even a system that moves millions must finely tune its operations to the pulse of the city.</p>
-  <div class="row align-items-center">
-    <div class="col-md-6">
-      <h5 style="text-align:center;">PTV Passenger Count by Time</h5>
-      <div class="vis" id="blc_vis" style="text-align:center;"></div>
+  <!-- ===== Header ===== -->
+  <h1 class="display-2 mb-5">Public Transport: How Crucial Are They?</h1>
+
+  <!-- ===== Section 1: Public Transport Role ===== -->
+  <section class="mb-5">
+    <h3>1. Public Transport Role</h3>
+
+    <div class="row align-items-center mb-2">
+      <!-- Text Column -->
+      <div class="col-md-4">
+        <p>
+          Public transport is the lifeline of a growing city — shaping how people move, work, and connect. 
+          In Melbourne, Metro Trains plays a central role in keeping the city moving, with millions of daily 
+          commuters depending on it for accessibility and sustainability. 
+          In the 2023–24 financial year, Metro Trains recorded over <b>182 million passenger</b> boardings — 
+          a massive number to say the least. To put it to scale, the Melbourne Cricket Ground (MCG) can hold up to 
+          <b>100,000 people</b>; multiply that by <b>180</b>. 
+          This scale reflects not just the city’s reliance on rail transport, but its contribution to 
+          <b>easing congestion, reducing emissions, and connecting communities</b> across metropolitan Melbourne. 
+          The visualisation here uses 🏟️ icons — each representing approximately 10 million journeys (or 10 MCGs) — 
+          to illustrate the magnitude of these annual boardings and the importance of a robust public transport network 
+          in supporting an interconnected, sustainable city.
+        </p>
+      </div>
+
+      <!-- Visualization Column -->
+      <div class="col-md-8" style="height: 400px;">
+        <h5 class="text-center">Annual Passenger Isotype</h5>
+        <div class="vis" id="isotype_vis"></div>
+      </div>
     </div>
-    <div class="col-md-6">
-      <h5 style="text-align:center;">Passengers by station heatmap</h5>
+  </section>
+  <hr class="mb-5">
+  <!-- ===== Section 2: Passenger Demand & Heatmap ===== -->
+  <section class="mb-5">
+    <h3>2. Understanding Passenger Demand</h3>
+
+    <div class="row align-items-center mb-4">
+      <!-- Visualization -->
+      <div class="col-md-7" style="height: 400px;">
+        <h5 class="text-center">PTV Passenger Count by Time</h5>
+        <div class="vis" id="blc_vis"></div>
+      </div>
+
+      <!-- Explanation -->
+      <div class="col-md-5">
+        <p>
+          Melbourne’s rail network continues to evolve alongside the city’s changing rhythms. 
+          Passenger demand is <b>uneven throughout the day</b> — rising sharply during <b>weekday peaks</b>, easing during <b>midday hours</b>, and <b>shifting across weekends and holidays</b>. 
+          Each <b>line</b>, <b>station</b>, and <b>time period</b> presents unique challenges for <b>scheduling</b>, <b>staffing</b>, and <b>infrastructure planning</b>. 
+          This variation highlights the ongoing task of <b>balancing capacity and efficiency</b>, <b>maintaining reliability during busy times</b>, and <b>ensuring accessibility during quieter periods</b>. 
+          The visualisation below illustrates these <b>patterns in passenger demand</b> by <b>time of day</b> and <b>day of the week</b>, showing how the network continuously adjusts to serve the <b>city’s dynamic movement</b>.
+        </p>
+      </div>
+    </div>
+
+    <!-- Heatmap -->
+    <p class="pb-2">
+      To better understand the <b>complexity of scheduling and managing train operations</b>, the heatmap below shows the <b>number of train departures</b> on each line at different <b>times of day</b>. 
+      It highlights how <b>multiple lines operate simultaneously</b> across the network — with some sections reaching up to <b>400 train departures per hour</b> on the same track, and it is safe to say that there is a pattern to best accomodate Melbourne's ever changing lifestyle
+    </p>
+
+    <div class="text-center" style="height: 400px; margin-bottom: 10rem;">
+      <h5>Passengers by Train Line Heatmap</h5>
       <div class="vis" id="hm_vis"></div>
     </div>
-  </div>
-  <h3>2. Complexity of Public Transport</h3>
+  </section>
+
+<hr class="mb-5">
+  <!-- ===== Section 3: Network Complexity ===== -->
+  <section class="mb-5">
+    <h3>3. Complexity & Challenges of Public Transport </h3>
+
+    <p>
+    Previously, we have established that creating a <b>network of trains</b> in a city as large and dynamic as Melbourne is an <b>incredibly complex task</b>. 
+    Now, let's take a closer look at what this complexity truly means in practice. 
+    Beyond simply laying tracks and scheduling services, it involves <b>coordinating thousands of train movements</b>, <b>balancing peak-hour demand</b>, and <b>maintaining reliable service</b> across an extensive and evolving network. 
+    Every station, line, and connection point must operate in harmony to ensure that passengers can travel <b>efficiently, safely, and on time</b>. 
+    By zooming in to the finer details, we can better appreciate the <b>interconnected systems</b> and <b>careful planning</b> that keep Melbourne’s rail network running smoothly each day.
+    </p>
+
+    <div class="row align-items-center" style="margin-bottom: 5rem;">
+      <div class="col-md-3 ">
+          <p>
+          Here is a <b>proportional symbol map</b> of Melbourne’s train network, illustrating the <b>number of passengers</b> boarding at each station. 
+          Each circle represents a station, with its size corresponding to the <b>volume of annual passengers</b>. 
+          This visualisation highlights just how <b>extensive the network truly is</b> — stretching across suburbs, business hubs, and residential areas — and how much ground it must cover to keep the city moving efficiently. 
+          The larger symbols reveal key interchange and city-center stations that handle a significant share of the network’s load, while smaller ones show the quieter outer-suburban stops that still play a vital role in ensuring <b>connectivity and accessibility</b> across Melbourne.
+          </p>
+
+      </div>
+      <div class="col-md-9" style="height: 550px;">
+          <h5 class="text-center mb-3">PTV Metro Trains Annual Passenger</h5>
+          <div class="vis" id="map_vis"></div>
+      </div>
+    </div>
+
+    <div class="row align-items-center mt-4 mb-4">
+      <div class="col-md-8">
+          <h5 class="text-center mt-5">Distance to Nearest Train Station</h5>
+          <div class="vis" id="bm_vis"></div>
+      </div>
+      <div class="col-md-4">
+        <p>
+        However, the reach of the <b>metropolitan train network</b> in Melbourne is not perfect. 
+        As shown in this <b>bin map</b>, there are still many <b>suburban areas</b> where access to a train station requires travelling a considerable distance. 
+        These gaps highlight the ongoing challenge of ensuring <b>equitable transport accessibility</b> across the city — especially in outer suburbs where population growth continues to outpace infrastructure development. 
+        Improving these connections is essential to support a more <b>connected, sustainable, and inclusive</b> urban transport system for all Melburnians.
+        </p>
+      </div>
 
 
+    </div>
+
+      <p>
+      Finally, it’s important to recognise that <b>Public Transport Victoria (PTV)</b> operates as a <b>heavily subsidised government service</b>. 
+      The revenue from ticket sales and commercial activities covers only a <b>fraction of the total operating cost</b> — approximately <b>$1.1 billion annually</b>. 
+      With operational expenses continuing to rise, the system relies on <b>substantial government funding</b> to maintain and expand services. 
+      This heavy dependence highlights the <b>critical role of public investment</b> in sustaining Melbourne’s transport network and ensuring that it remains <b>affordable, reliable, and accessible</b> for all. 
+      However, it also means that the <b>future of public transport</b> — including new projects, upgrades, and service improvements — lies largely in the <b>hands of government priorities and budget allocations</b>. 
+      Balancing these financial pressures with the growing demand for <b>greener, more efficient transport options</b> will be a defining challenge for the years ahead.
+      </p>    
+      <div class="row">
+        <div class="col-md-6 text-center">
+          <h5>Public Transport Victoria Income 2022</h3>
+          <div class="vis" id="sb_vis"></div>
+      </div>
+      <div class="col-md-6 text-center">
+        <h5 class="mb-3">Public Transport Victoria Expenses 2022</h3>
+        <div class="vis" id="sb_out_vis"></div>
+        </div>
+    </div>
+    
+    
 
 
-        <h2 class="align-self-center">PTV Metro Trains Annual Passenger</h2>
-        <div class="vis" id="map_vis" style="text-align:center;"></div>
+  </section>
 
-
-
-  <script type="module" src="js/main.js">
+  <!-- ===== Scripts ===== -->
+  <script type="module" src="js/main.js"></script>
+  <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" 
+    crossorigin="anonymous">
   </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
 </body>
 </html>
